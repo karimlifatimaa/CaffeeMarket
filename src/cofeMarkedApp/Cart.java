@@ -9,28 +9,33 @@ public class Cart<T extends CoffeeProduct> {
         cartProducts = new ArrayList<>();
     }
     public void addById(int id,ArrayList<T> products) {
+        boolean found = false;
         for (T product : products) {
             if(product.getId()==id){
                 cartProducts.add(product);
                 totalPrice+=product.getPrice();
                 System.out.printf("Mehsul elave edildi: "+ product.getName());
+                found = true;
                 break;
-            }else{
-                System.out.println("Bele mehsul yoxdur");
             }
+        }
+        if(!found){
+            System.out.println("Bele mehsul yoxdur");
         }
     }
     public void removeProduct(int productId) {
+        boolean removed = false;
         for (T item : cartProducts) {
                 if (item.getId() == productId) {
                     cartProducts.remove(item);
                     totalPrice-=item.getPrice();
                     System.out.println(item.getName() + " Mehsul silindi.");
+                    removed = true;
                     break;
-                }else{
-                    System.out.println("Bele mehsul yoxdur");
                 }
-
+        }
+        if(!removed){
+            System.out.println("Bele mehsul yoxdur");
         }
     }
     public void viewAllProducts() {
